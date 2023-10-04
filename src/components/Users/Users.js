@@ -169,7 +169,7 @@ function ProfileReducer() {
 
   return (
     <div className="rootDivContainer">
-      <h2>Add User</h2>
+      <h2>{editIndex !== -1 ? "Edit User" : "Add User"}</h2>
     {/* form */}
       <div className="formMaintainer">
         <div className="formContainer">
