@@ -50,9 +50,10 @@ function FormComponent() {
       setProfNameDirty(false);
       setDesignationDirty(false);
       setProfImageDirty(false);
-    } else {
-      alert("please complete the form");
-    }
+    } 
+    // else {
+    //   alert("please complete the form");
+    // }
   };
   const editProfile = (pIndex) => {
     setProfileName(profileDataState[pIndex].profileName);
@@ -63,7 +64,7 @@ function FormComponent() {
   return (
     <>
       <div className="rootDivContainer">
-        <h2>Add Profile</h2>
+        <h2>{editIndex !== -1 ? "Edit Profile" : "Add Profile"}</h2>
         <div className="formMaintainer">
           <div className="formContainer">
             <div>
