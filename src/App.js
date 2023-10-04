@@ -5,9 +5,9 @@ import ProfileFormDump from "./components/dump/ProfileFormDump";
 function App() {
   return (
     <div className="app">
-      <div style={{ display: "grid" }}>
+      {/* <div style={{ display: "grid" }}>
         <p style={{ justifySelf: "center" }}>Innomatics JNTU</p>
-      </div>
+      </div> */}
       {/* <ProfileReducer/> */}
       {/* <ProfileFormDump/>*/}
       <FormComponent />
