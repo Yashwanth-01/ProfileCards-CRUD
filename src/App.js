@@ -5,6 +5,18 @@ import UserIndex from "./components/Users";
 import CandidateIndex from "./components/Candidates";
 function App() {
   const [pageState, setPageState] = useState("");
+  function renderPage(){
+    switch(pageState){
+      case 'Profiles':
+        return <ProfileIndex />;
+      case 'Users':
+        return <UserIndex />;
+      case 'Candidates':
+        return <CandidateIndex/>;
+      default:
+        return null;
+    }
+  }
   return (
     <div className="app">
       <div style={{ display: "grid" }}>
@@ -29,13 +41,15 @@ function App() {
           setPageState("Candidates");
         }}
       >Candidates</button>
-      {pageState === "Profiles" ? (
+      {renderPage()}
+
+      {/* {pageState === "Profiles" ? (
         <ProfileIndex />
       ) : pageState === "Users" ? (
         <UserIndex />
       ) : (
         <CandidateIndex/>
-      )}
+      )} */}
     </div>
   );
 }
