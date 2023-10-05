@@ -1,19 +1,20 @@
 import { Fragment } from "react";
 
 const ListComponent = (props) => {
-  const { profileDataState, dispatchProfileDataState, editProfile } = props;
+  const { dataState, dispatchDataState, edit, mainHeader, initialState } =
+    props;
   return (
     <>
-      <h2>Profiles</h2>
+      <h2>{mainHeader}s</h2>
 
       <div className="rootContainer">
-        {profileDataState.map((profile, index) => {
+        {dataState.map((item, index) => {
           return (
             <Fragment key={index}>
               <div className="card">
                 <img
-                  title={profile.profileName}
-                  src={profile.profileImage}
+                  title={item.name}
+                  src={item.image}
                   alt="Avatar"
                   style={{ width: "100%" }}
                 />
@@ -25,7 +26,7 @@ const ListComponent = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    <p style={{ fontWeight: "bold" }}>{profile.profileName}</p>
+                    <p style={{ fontWeight: "bold" }}>{item.name}</p>
                   </div>
                   <div
                     style={{
@@ -34,11 +35,11 @@ const ListComponent = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    <p>{profile.designation}</p>
+                    <p>{item.designation}</p>
                   </div>
                   <div className="iconContainer">
                     <img
-                      onClick={() => editProfile(index)}
+                      onClick={() => edit(index)}
                       title="EDIT"
                       alt="edit"
                       className="imager"
@@ -46,10 +47,10 @@ const ListComponent = (props) => {
                     />
                     <img
                       onClick={() => {
-                        // deleteProfile(index);
-                        dispatchProfileDataState({
+                        dispatchDataState({
+                          initialState: initialState,
                           type: "delete",
-                          currProfInd: index,
+                          currInd: index,
                         });
                       }}
                       title="DELETE"

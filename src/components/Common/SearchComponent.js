@@ -2,16 +2,17 @@ import { useState } from "react";
 
 /**
  {
-    dispatchProfileDataState:dispatchProfileDataState()
+    dispatchDataState:dispatchDataState()
  }
  */
 const SearchComponent = (props) => {
-  const { dispatchProfileDataState } = props;
+  const { dispatchDataState, mainHeader, initialState } = props;
   const [searchInp, setSearchInp] = useState(""); // holds value of Search Input
 
   const onSearch = (e) => {
     setSearchInp(e.target.value);
-    dispatchProfileDataState({
+    dispatchDataState({
+      initialState: initialState,
       type: "search",
       srhText: e.target.value,
     });
@@ -19,7 +20,7 @@ const SearchComponent = (props) => {
 
   return (
     <>
-      <h2>Search Profile</h2>
+      <h2>Search {mainHeader}</h2>
 
       <div className="formMaintainer">
         <div className="formContainer">
@@ -31,7 +32,7 @@ const SearchComponent = (props) => {
                 value={searchInp}
                 style={{ width: "100%" }}
                 name="Search"
-                placeholder="Search by Profile Name or Designation"
+                placeholder={"Search by " +  mainHeader  + " or Designation"}
               />
             </div>
           </div>

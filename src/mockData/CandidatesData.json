@@ -1,0 +1,42 @@
+[
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      "name": "Max",
+      "designation": "Software Developer"
+    },
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
+      "name": "Edwards",
+      "designation": "Doctor"
+    },
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      "name": "Itachi",
+      "designation": "Engineer"
+    },
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
+      "name": "Cris",
+      "designation": "Student"
+    },
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      "name": "Peter",
+      "designation": "Advocate"
+    },
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
+      "name": "Harry",
+      "designation": "Student"
+    },
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      "name": "Samuel",
+      "designation": "Scientist"
+    },
+    {
+      "image": "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
+      "name": "Stark",
+      "designation": "Software Developer"
+    }
+  ]

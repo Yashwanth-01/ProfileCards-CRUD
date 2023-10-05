@@ -1,87 +1,85 @@
 import { useReducer, useState } from "react";
-import { initialState, profileReducer } from "../../state/profileReducer";
+import { crudReducer } from "../../state/crudReducer";
 import SearchComponent from "./SearchComponent";
 import ListComponent from "./ListComponent";
-import "../CSS/Profiles.css"
-function FormComponent() {
-  const [profileName, setProfileName] = useState(""); // holds value of Profile Name
-  const [profNameDirty, setProfNameDirty] = useState(false);
+import "../CSS/crud.css";
+function FormComponent(props) {
+  const { mainHeader, initialState } = props;
+  const [name, setName] = useState(""); // holds value of Profile Name
+  const [nameDirty, setNameDirty] = useState(false);
   const [designation, setDesignation] = useState(""); // holds value of Designation
   const [designationDirty, setDesignationDirty] = useState(false);
-  const [profileImage, setProfileImage] = useState(""); // holds value of profile Image
-  const [profImageDirty, setProfImageDirty] = useState(false);
+  const [image, setImage] = useState(""); // holds value of profile Image
+  const [imageDirty, setImageDirty] = useState(false);
   const [editIndex, setEditIndex] = useState(-1);
-  const [profileDataState, dispatchProfileDataState] = useReducer(
-    profileReducer,
-    initialState
-  );
-  const handleChangeProfileName = (e) => {
-    setProfNameDirty(true);
-    setProfileName(e.target.value); // setting the Profile Name state
+  const [dataState, dispatchDataState] = useReducer(crudReducer, initialState);
+  const handleChangeName = (e) => {
+    setNameDirty(true);
+    setName(e.target.value); // setting the Profile Name state
   };
   const handleChangeDesignation = (e) => {
     setDesignationDirty(true);
     setDesignation(e.target.value); // setting the Profile Name state
   };
-  const handleChangeProfileImage = (e) => {
-    setProfImageDirty(true);
-    setProfileImage(e.target.value); // setting the Profile Name state
+  const handleChangeImage = (e) => {
+    setImageDirty(true);
+    setImage(e.target.value); // setting the Profile Name state
   };
   const onSubmit = () => {
     // create and update
-    setProfNameDirty(true);
+    setNameDirty(true);
     setDesignationDirty(true);
-    setProfImageDirty(true);
-    if (profileName.length && profileImage.length && designation.length) {
-      dispatchProfileDataState({
+    setImageDirty(true);
+    if (name.length && image.length && designation.length) {
+      dispatchDataState({
         type: editIndex !== -1 ? "update" : "create",
-        // profileName, profileImage, designation
-        newProfileDtls: {
-          profileName,
-          profileImage,
+        // name, image, designation
+        newDtls: {
+          name,
+          image,
           designation,
         }, // task 1
         editIndex: editIndex,
+        initialState: initialState,
       });
-      setProfileName("");
+      setName("");
       setDesignation("");
-      setProfileImage("");
+      setImage("");
       setEditIndex(-1);
-      setProfNameDirty(false);
+      setNameDirty(false);
       setDesignationDirty(false);
-      setProfImageDirty(false);
-    } 
-    // else {
-    //   alert("please complete the form");
-    // }
+      setImageDirty(false);
+    } else {
+      alert("please complete the form");
+    }
   };
-  const editProfile = (pIndex) => {
-    setProfileName(profileDataState[pIndex].profileName);
-    setDesignation(profileDataState[pIndex].designation);
-    setProfileImage(profileDataState[pIndex].profileImage);
+  const edit = (pIndex) => {
+    setName(dataState[pIndex].name);
+    setDesignation(dataState[pIndex].designation);
+    setImage(dataState[pIndex].image);
     setEditIndex(pIndex);
   };
   return (
     <>
       <div className="rootDivContainer">
-        <h2>{editIndex !== -1 ? "Edit Profile" : "Add Profile"}</h2>
+        <h2>Add {mainHeader}</h2>
         <div className="formMaintainer">
           <div className="formContainer">
             <div>
-              <label>Profile Name*</label>
+              <label>{mainHeader} Name*</label>
               <div style={{ display: "grid" }}>
                 <input
-                  name="ProfileName"
-                  value={profileName}
+                  name={mainHeader + "Name"}
+                  value={name}
                   onChange={(e) => {
-                    handleChangeProfileName(e);
+                    handleChangeName(e);
                   }}
                 />
                 {
                   // ! not / negation
                   // cond rendering -> tertiary operator / &&
-                  !profileName.length && profNameDirty && (
-                    <span>Profile Name is Required</span>
+                  !name.length && nameDirty && (
+                    <span>{mainHeader} Name is Required</span>
                   )
                 }
               </div>
@@ -104,17 +102,17 @@ function FormComponent() {
               </div>
             </div>
             <div>
-              <label>Profile Image*</label>
+              <label>{mainHeader} Image*</label>
               <div style={{ display: "grid" }}>
                 <input
-                  name="ProfileImage"
-                  value={profileImage}
+                  name={mainHeader + "Image"}
+                  value={image}
                   onChange={(e) => {
-                    handleChangeProfileImage(e);
+                    handleChangeImage(e);
                   }}
                 />
-                {!profileImage.length && profImageDirty && (
-                  <span>Profile Image is Required</span>
+                {!image.length && imageDirty && (
+                  <span>{mainHeader} Image is Required</span>
                 )}
               </div>
             </div>
@@ -129,11 +127,17 @@ function FormComponent() {
             {editIndex !== -1 ? "EDIT" : "Submit"}
           </button>
         </div>
-        <SearchComponent dispatchProfileDataState={dispatchProfileDataState} />
+        <SearchComponent
+          initialState={initialState}
+          mainHeader={mainHeader}
+          dispatchDataState={dispatchDataState}
+        />
         <ListComponent
-          editProfile={editProfile}
-          dispatchProfileDataState={dispatchProfileDataState}
-          profileDataState={profileDataState}
+          initialState={initialState}
+          mainHeader={mainHeader}
+          edit={edit}
+          dispatchDataState={dispatchDataState}
+          dataState={dataState}
         />
       </div>
     </>

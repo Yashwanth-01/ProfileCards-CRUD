@@ -1,19 +1,41 @@
+import { useState } from "react";
 import "./App.css";
-import FormComponent from "./components/Common/FormComponent";
-// import ProfileReducer from "./components/Profiles/ProfileReducer";
-import ProfileFormDump from "./components/dump/ProfileFormDump";
-import Users from "./components/Users/Users"
-
+import ProfileIndex from "./components/Profiles";
+import UserIndex from "./components/Users";
+import CandidateIndex from "./components/Candidates";
 function App() {
+  const [pageState, setPageState] = useState("");
   return (
     <div className="app">
-      {/* <div style={{ display: "grid" }}>
+      <div style={{ display: "grid" }}>
         <p style={{ justifySelf: "center" }}>Innomatics JNTU</p>
-      </div> */}
-      {/* <ProfileReducer/> */}
-      {/* <ProfileFormDump/>*/}
-      <FormComponent />
-      {/* <Users/> */}
+      </div>
+      <button
+        onClick={() => {
+          setPageState("Profiles");
+        }}
+      >
+        Profiles
+      </button>
+      <button
+        onClick={() => {
+          setPageState("Users");
+        }}
+      >
+        Users
+      </button>
+      <button
+        onClick={() => {
+          setPageState("Candidates");
+        }}
+      >Candidates</button>
+      {pageState === "Profiles" ? (
+        <ProfileIndex />
+      ) : pageState === "Users" ? (
+        <UserIndex />
+      ) : (
+        <CandidateIndex/>
+      )}
     </div>
   );
 }
