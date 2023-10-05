@@ -4,7 +4,7 @@ import CandidatesData from "../../mockData/CandidatesData.json"
 const CandidateIndex = () => {
     return(
         <>
-        <FormComponent mainHeader = {'Candidates'} initialState = {CandidatesData}/>
+        <FormComponent mainHeader = {'Candidate'} initialState = {CandidatesData}/>
         </>
     )
 }
