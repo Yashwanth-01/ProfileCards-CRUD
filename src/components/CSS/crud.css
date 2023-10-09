@@ -84,6 +84,11 @@ button {
     transform: rotate(5deg) scale(1.5);
 }
 
+.focused-button {
+    background-color: white;
+    color: #4CAF50;
+}
+
 @media screen and (max-width: 768px) {
     div {
         grid-template-columns: 1fr;
