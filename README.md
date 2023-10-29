@@ -107,3 +107,16 @@ Online
 
 1 - 7
 2 - 0
+
+1.  src/components/friends/index.js -> FriendsIndex
+2.  src/mockData/FriendsData.json
+3. src/components/friends/index.js
+	a) import src/mockData/FriendsData.json
+	b) import FormComponent
+				mainHeader={Friends}
+				initialState = (a)
+4. src/App.js 
+	a) Create a new Button with name Friends
+	b) you will attach event listener
+	c) eventHandler => setState('Friends')
+	d) just add new condition - Use Switch for condional rendering

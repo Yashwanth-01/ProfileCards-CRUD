@@ -1,8 +1,9 @@
 import { Fragment } from "react";
+import { useScreen } from "../../state/ScreenContext";
 
 const ListComponent = (props) => {
-  const { dataState, dispatchDataState, edit, mainHeader, initialState } =
-    props;
+  const { mainHeader, initialState } = useScreen();
+  const { dataState, dispatchDataState, edit } = props;
   return (
     <>
       <h2>{mainHeader}s</h2>

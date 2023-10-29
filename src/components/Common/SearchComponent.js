@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useScreen } from "../../state/ScreenContext";
 
 /**
  {
@@ -6,7 +7,8 @@ import { useState } from "react";
  }
  */
 const SearchComponent = (props) => {
-  const { dispatchDataState, mainHeader, initialState } = props;
+  const { mainHeader, initialState } = useScreen();
+  const { dispatchDataState} = props;
   const [searchInp, setSearchInp] = useState(""); // holds value of Search Input
 
   const onSearch = (e) => {

@@ -1,10 +1,20 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { crudReducer } from "../../state/crudReducer";
 import SearchComponent from "./SearchComponent";
 import ListComponent from "./ListComponent";
 import "../CSS/crud.css";
-function FormComponent(props) {
-  const { mainHeader, initialState } = props;
+import { useScreen } from "../../state/ScreenContext";
+
+function FormComponent() {
+  const { mainHeader, initialState } = useScreen();
+  /*
+  props = {
+    mainHeader:'Profile',
+    initialState: ProfileData
+  }
+  const mainHeader = props.mainHeader
+  const initialState = props.initialState
+  */
   const [name, setName] = useState(""); // holds value of Profile Name
   const [nameDirty, setNameDirty] = useState(false);
   const [designation, setDesignation] = useState(""); // holds value of Designation
@@ -13,6 +23,14 @@ function FormComponent(props) {
   const [imageDirty, setImageDirty] = useState(false);
   const [editIndex, setEditIndex] = useState(-1);
   const [dataState, dispatchDataState] = useReducer(crudReducer, initialState);
+  const formDiv = useRef(null);
+
+  useEffect(() => {
+    dispatchDataState({
+      initialState: initialState
+    })
+  }, [initialState]);
+
   const handleChangeName = (e) => {
     setNameDirty(true);
     setName(e.target.value); // setting the Profile Name state
@@ -31,6 +49,13 @@ function FormComponent(props) {
     setDesignationDirty(true);
     setImageDirty(true);
     if (name.length && image.length && designation.length) {
+      /**
+       newDtls: {
+        name: name
+        image: image
+        designation: designation
+       }
+       */
       dispatchDataState({
         type: editIndex !== -1 ? "update" : "create",
         // name, image, designation
@@ -58,12 +83,17 @@ function FormComponent(props) {
     setDesignation(dataState[pIndex].designation);
     setImage(dataState[pIndex].image);
     setEditIndex(pIndex);
+    if (formDiv.current) {
+      formDiv.current.scrollIntoView({ behaviour: "smooth" });
+    }
   };
   return (
     <>
       <div className="rootDivContainer">
-        <h2>Add {mainHeader}</h2>
-        <div className="formMaintainer">
+        <h2>
+          {editIndex === -1 ? "Add" : "Edit "} {mainHeader}
+        </h2>
+        <div className="formMaintainer" ref={formDiv}>
           <div className="formContainer">
             <div>
               <label>{mainHeader} Name*</label>
@@ -124,17 +154,13 @@ function FormComponent(props) {
               onSubmit();
             }}
           >
-            {editIndex !== -1 ? "EDIT" : "Submit"}
+            {editIndex === -1 ? "Submit" : "Edit"}
           </button>
         </div>
         <SearchComponent
-          initialState={initialState}
-          mainHeader={mainHeader}
           dispatchDataState={dispatchDataState}
         />
         <ListComponent
-          initialState={initialState}
-          mainHeader={mainHeader}
           edit={edit}
           dispatchDataState={dispatchDataState}
           dataState={dataState}

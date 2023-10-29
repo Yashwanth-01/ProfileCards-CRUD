@@ -1,11 +1,12 @@
 import { Fragment } from "react";
+import { useStory } from "../../state/StoryContext";
 
-const Stories = (props) => {
-    const {storyList} = props;
-    return(
-        <>
-        <p>Stories</p>
-        <div className="rootContainer">
+const Stories = () => {
+  const { storyList } = useStory();
+  return (
+    <>
+      <p>Stories</p>
+      <div className="rootContainer">
         {storyList.map((story, index) => {
           return (
             <Fragment key={index}>
@@ -26,7 +27,8 @@ const Stories = (props) => {
           );
         })}
       </div>
-        </>
-    )
-}
+    </>
+  );
+};
+
 export default Stories;
